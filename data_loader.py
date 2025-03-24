@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
+from sklearn.decomposition import PCA
 import seaborn as sns
 from matplotlib import pyplot as plt
 from typing import Tuple
@@ -112,6 +113,34 @@ def handle_missing_data(
     return X_clean
 
 
+def detect_outlier_zscore(X: pd.DataFrame, threshold: float = 3):
+    """Detect Outlier using zscore"""
+    # z_score calculation
+    z_score = np.abs((X - X.mean()) / X.std())
+
+    # flags rows where feature has zscore greater than 3std dev
+    outliers = (z_score > threshold).any(axis=1)
+
+    # count and get indices of outliers
+    outliers_count = outliers.sum()
+    outliers_indices = outliers[outliers].index.tolist()
+
+    return outliers_count, outliers_indices
+
+
+def remove_outliers(X: pd.DataFrame, y: pd.Series, threshold: float = 3):
+    """removeing outliers using detect_outlier_zscore function."""
+    outliers_count, outliers_indices = detect_outlier_zscore(X, threshold)
+
+    # Remove outliers from X and y
+    X_cleaned = X.drop(index=outliers_indices)
+    y_cleaned = y.drop(index=outliers_indices)
+
+    print(f"Removed {outliers_count} outliers.")
+
+    return X_cleaned, y_cleaned
+
+
 def preprocess_data(X: pd.DataFrame) -> np.ndarray:
     """Preprocess the features by standardizing them."""
     scaler = StandardScaler()
@@ -120,19 +149,51 @@ def preprocess_data(X: pd.DataFrame) -> np.ndarray:
     return X_scaled
 
 
+# -------------------------
+# Advanced Data Quality Checks
+# -------------------------
+
+
+def detect_sensor_drift(X: pd.DataFrame) -> pd.DataFrame:
+    """Checking sensor drift by statistics computation"""
+    return X.describe().loc[["mean", "std"]]
+
+
+def detect_sensor_drift_PCA(X: pd.DataFrame, y: pd.Series, n_components=2):
+    """Perform PCA to detect sensor drift and visualize it"""
+    # first we have to scale the feature to bring in similiar scale
+    scaler = StandardScaler()
+    X_scaled = scaler.fit_transform(X)
+
+    # Applying PCA
+    pca = PCA(n_components=n_components)
+    pca_result = pca.fit_transform(X_scaled)
+
+    # PCA plot
+    plt.figure(figsize=(10, 5))
+    plt.scatter(pca_result[:, 0], pca_result[0:, 1], c=y, cmap="plasma")
+    plt.xlabel("principal component 1")
+    plt.ylabel("principal component 2")
+    plt.title("PCA for sensor Drift Detection")
+    plt.show()
+
+
+def create_spectral_indices(X: pd.DataFrame) -> pd.DataFrame:
+    """additional spectral indices(Ex: ratios of bands)"""
+    # Example: Normalized Difference Index between two arbitrary bands
+    band1, band2 = X.columns[10], X.columns[20]
+    X["ndi"] = (X[band1] - X[band2]) / (X[band1] + X[band2])
+
+    return X
+
+
+# -------------------------
+# Data Splitting
+# -------------------------
+
+
 def split_data(
     X: np.ndarray, y: pd.Series, test_size: float = 0.2
 ) -> Tuple[np.ndarray, np.ndarray, pd.Series, pd.Series]:
-    """
-    Split the dataset into training and testing sets.
-
-    Args:
-        X (np.ndarray): The features.
-        y (pd.Series): The target variable.
-        test_size (float): Proportion of the dataset to include in the test split.
-
-    Returns:
-        Tuple[np.ndarray, np.ndarray, pd.Series, pd.Series]: Training features, testing features,
-                                                             training labels, testing labels.
-    """
+    """Split the dataset into training and testing sets."""
     return train_test_split(X, y, test_size=test_size, random_state=42)
