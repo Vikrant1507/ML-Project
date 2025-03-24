@@ -193,7 +193,7 @@ def create_spectral_indices(X: pd.DataFrame) -> pd.DataFrame:
 
 
 def split_data(
-    X: np.ndarray, y: pd.Series, test_size: float = 0.2
+    X: np.ndarray, y: pd.Series, test_size: float = 0.2, **kwargs
 ) -> Tuple[np.ndarray, np.ndarray, pd.Series, pd.Series]:
     """Split the dataset into training and testing sets."""
-    return train_test_split(X, y, test_size=test_size, random_state=42)
+    return train_test_split(X, y, test_size=test_size, **kwargs)
