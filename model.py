@@ -15,15 +15,17 @@ import optuna
 
 def build_simple_nn(
     input_shape: int,
-    n_units: int = 128,
-    learning_rate: float = 0.001,
-    dropout_rate: float = 0.3,
+    n_units: int = 256,  # Increased neurons
+    learning_rate: float = 0.0005,  # Reduced learning rate
+    dropout_rate: float = 0.2,  # Less dropout
 ) -> Sequential:
     """Build a Simple Regression neural Network"""
     model = Sequential(
         [
             Dense(n_units, activation="relu", input_shape=(input_shape,)),
             Dropout(dropout_rate),
+            Dense(128, activation="relu"),  # Added more neurons
+            Dropout(0.2),
             Dense(64, activation="relu"),
             Dense(1),
         ]

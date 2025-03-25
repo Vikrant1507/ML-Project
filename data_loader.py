@@ -128,17 +128,120 @@ def detect_outlier_zscore(X: pd.DataFrame, threshold: float = 3):
     return outliers_count, outliers_indices
 
 
-def remove_outliers(X: pd.DataFrame, y: pd.Series, threshold: float = 3):
-    """removeing outliers using detect_outlier_zscore function."""
-    outliers_count, outliers_indices = detect_outlier_zscore(X, threshold)
+import numpy as np
+import pandas as pd
+from scipy import stats
+from sklearn.ensemble import IsolationForest
+from sklearn.preprocessing import StandardScaler
 
-    # Remove outliers from X and y
-    X_cleaned = X.drop(index=outliers_indices)
-    y_cleaned = y.drop(index=outliers_indices)
 
-    print(f"Removed {outliers_count} outliers.")
+def detect_outliers_multiple_methods(X: pd.DataFrame, method="all", threshold=3):
+    """
+    Detect outliers using three methods:
+    1. Z-Score Method
+    2. Interquartile Range (IQR) Method
+    3. Isolation Forest
 
-    return X_cleaned, y_cleaned
+    Parameters:
+    -----------
+    X : pd.DataFrame
+        Input dataframe
+    method : str, optional (default='all')
+        Specific method to use or 'all' to return results from all methods
+    threshold : float, optional (default=3)
+        Threshold for outlier detection
+
+    Returns:
+    --------
+    dict or pd.Index
+        Indices of detected outliers or dictionary of results
+    """
+    # Ensure input is a DataFrame
+    if not isinstance(X, pd.DataFrame):
+        X = pd.DataFrame(X)
+
+    # Standardize the data
+    scaler = StandardScaler()
+    X_scaled = pd.DataFrame(scaler.fit_transform(X), columns=X.columns, index=X.index)
+
+    results = {}
+
+    # 1. Z-Score Method
+    def z_score_outliers(data, threshold=3):
+        z_scores = np.abs(stats.zscore(data))
+        return np.where(np.any(z_scores > threshold, axis=1))[0]
+
+    z_score_indices = z_score_outliers(X_scaled, threshold)
+    results["z_score"] = X.index[z_score_indices]
+
+    # 2. Interquartile Range (IQR) Method
+    def iqr_outliers(data, threshold=1.5):
+        Q1 = data.quantile(0.25)
+        Q3 = data.quantile(0.75)
+        IQR = Q3 - Q1
+        lower_bound = Q1 - threshold * IQR
+        upper_bound = Q3 + threshold * IQR
+
+        outliers_mask = ((data < lower_bound) | (data > upper_bound)).any(axis=1)
+        return np.where(outliers_mask)[0]
+
+    iqr_indices = iqr_outliers(X_scaled)
+    results["iqr"] = X.index[iqr_indices]
+
+    # 3. Isolation Forest
+    def isolation_forest_outliers(data, contamination=0.1):
+        clf = IsolationForest(contamination=contamination, random_state=42)
+        y_pred = clf.fit_predict(data)
+        return np.where(y_pred == -1)[0]
+
+    iso_forest_indices = isolation_forest_outliers(X_scaled)
+    results["isolation_forest"] = X.index[iso_forest_indices]
+
+    # Print summary
+    print("Outlier Detection Summary:")
+    for method_name, indices in results.items():
+        print(f"{method_name.replace('_', ' ').title()}: {len(indices)} outliers")
+
+    # Return based on method parameter
+    if method == "all":
+        return results
+    elif method in results:
+        return results[method]
+    else:
+        raise ValueError(
+            f"Invalid method: {method}. Choose 'all' or one of: {list(results.keys())}"
+        )
+
+
+def remove_outliers(X, method="consensus", threshold=3):
+    """
+    Remove outliers from dataset using specified method
+
+    Parameters:
+    -----------
+    X : pd.DataFrame
+        Input dataframe
+    method : str, optional (default='consensus')
+        Method for outlier detection
+    threshold : float, optional (default=3)
+        Threshold for outlier detection
+
+    Returns:
+    --------
+    pd.DataFrame
+        Dataframe with outliers removed
+    """
+    # If X is a tuple of (X, y), separate them
+    if isinstance(X, tuple) and len(X) == 2:
+        X, y = X
+        outlier_indices = detect_outliers_multiple_methods(X, method, threshold)
+        X_cleaned = X.drop(index=outlier_indices)
+        y_cleaned = y.drop(index=outlier_indices)
+        return X_cleaned, y_cleaned
+
+    # If X is a single dataframe
+    outlier_indices = detect_outliers_multiple_methods(X, method, threshold)
+    return X.drop(index=outlier_indices)
 
 
 def preprocess_data(X: pd.DataFrame) -> np.ndarray:
