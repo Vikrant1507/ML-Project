@@ -23,12 +23,6 @@ pip install -r requirements.txt
 flask run
 ```
 
-### Production Mode
-```bash
-# Using gunicorn (recommended for production)
-gunicorn app:app
-```
-
 ## Endpoints
 
 - `/`: Home page with prediction input form
