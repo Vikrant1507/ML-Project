@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Prediction Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .result {
+            background-color: #f0f0f0;
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+
+        .back-link {
+            margin-top: 20px;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="result">
+        <h1>Vomitoxin Prediction Result</h1>
+        <p>Predicted Vomitoxin Level: <strong>{{ prediction }}</strong> ppb</p>
+    </div>
+    <div class="back-link">
+        <a href="/">Make Another Prediction</a>
+    </div>
+</body>
+
+</html>

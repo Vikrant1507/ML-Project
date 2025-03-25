@@ -6,35 +6,87 @@ from sklearn.decomposition import PCA
 import seaborn as sns
 from matplotlib import pyplot as plt
 from typing import Tuple
+import logging
+import sys
+
+
+# Configure logging
+def setup_logging(log_level=logging.INFO, log_file=None):
+    """
+    Set up logging configuration.
+
+    Args:
+        log_level: Logging level (default: logging.INFO)
+        log_file: Optional file path to save logs
+    """
+    # Create a formatter
+    formatter = logging.Formatter(
+        "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    )
+
+    # Create a logger
+    logger = logging.getLogger("DataProcessingLogger")
+    logger.setLevel(log_level)
+
+    # Clear any existing handlers to prevent duplicate logs
+    logger.handlers.clear()
+
+    # Console handler
+    console_handler = logging.StreamHandler(sys.stdout)
+    console_handler.setFormatter(formatter)
+    logger.addHandler(console_handler)
+
+    # File handler (optional)
+    if log_file:
+        file_handler = logging.FileHandler(log_file)
+        file_handler.setFormatter(formatter)
+        logger.addHandler(file_handler)
+
+    return logger
+
+
+# Initialize logger
+logger = setup_logging()
 
 
 def load_data(filepath: str) -> Tuple[pd.DataFrame, pd.Series]:
     """Load the dataset from a CSV file."""
-    data = pd.read_csv(filepath)
+    try:
+        logger.info(f"Loading data from: {filepath}")
+        data = pd.read_csv(filepath)
+        logger.info(f"Data loaded successfully. Shape: {data.shape}")
 
-    # Separate numeric and non-numeric columns
-    numeric_cols = data.select_dtypes(include=np.number).columns
+        # Separate numeric and non-numeric columns
+        numeric_cols = data.select_dtypes(include=np.number).columns
 
-    # Fill missing values only in numeric columns
-    for col in numeric_cols:
-        data[col].fillna(data[col].mean(), inplace=True)
+        # Fill missing values only in numeric columns
+        for col in numeric_cols:
+            data[col].fillna(data[col].mean(), inplace=True)
+            logger.debug(f"Filled missing values in {col} with mean")
 
-    # For non-numeric columns it needed to filled with mode or a default value
-    # filling with mode (most common value)
-    non_numeric_cols = data.select_dtypes(
-        exclude=np.number
-    ).columns  # np.number includes integers and floats
-    for col in non_numeric_cols:
-        if col != data.columns[0]:  # Skip the ID column (assuming it's the first)
-            data[col].fillna(
-                data[col].mode()[0] if not data[col].mode().empty else "", inplace=True
-            )
+        # For non-numeric columns it needed to filled with mode or a default value
+        non_numeric_cols = data.select_dtypes(exclude=np.number).columns
+        for col in non_numeric_cols:
+            if col != data.columns[0]:  # Skip the ID column (assuming it's the first)
+                data[col].fillna(
+                    data[col].mode()[0] if not data[col].mode().empty else "",
+                    inplace=True,
+                )
+                logger.debug(f"Filled missing values in {col} with mode")
 
-    # Define features and target variable
-    X = data.iloc[:, 1:-1]  # Assuming first column is ID, last is target
-    y = data["vomitoxin_ppb"]
+        # Define features and target variable
+        X = data.iloc[:, 1:-1]  # Assuming first column is ID, last is target
+        y = data["vomitoxin_ppb"]
 
-    return X, y
+        logger.info(f"Features shape: {X.shape}, Target shape: {y.shape}")
+        return X, y
+
+    except FileNotFoundError:
+        logger.error(f"File not found: {filepath}")
+        raise
+    except Exception as e:
+        logger.error(f"Unexpected error loading data: {e}")
+        raise
 
 
 # -------------------------
@@ -214,42 +266,39 @@ def detect_outliers_multiple_methods(X: pd.DataFrame, method="all", threshold=3)
 
 
 def remove_outliers(X, method="consensus", threshold=3):
-    """
-    Remove outliers from dataset using specified method
+    """Remove outliers from dataset using specified method"""
+    try:
+        logger.info(f"Removing outliers using {method} method")
+        # If X is a tuple of (X, y), separate them
+        if isinstance(X, tuple) and len(X) == 2:
+            X, y = X
+            outlier_indices = detect_outliers_multiple_methods(X, method, threshold)
+            logger.info(f"Number of outliers detected: {len(outlier_indices)}")
+            X_cleaned = X.drop(index=outlier_indices)
+            y_cleaned = y.drop(index=outlier_indices)
+            return X_cleaned, y_cleaned
 
-    Parameters:
-    -----------
-    X : pd.DataFrame
-        Input dataframe
-    method : str, optional (default='consensus')
-        Method for outlier detection
-    threshold : float, optional (default=3)
-        Threshold for outlier detection
-
-    Returns:
-    --------
-    pd.DataFrame
-        Dataframe with outliers removed
-    """
-    # If X is a tuple of (X, y), separate them
-    if isinstance(X, tuple) and len(X) == 2:
-        X, y = X
+        # If X is a single dataframe
         outlier_indices = detect_outliers_multiple_methods(X, method, threshold)
-        X_cleaned = X.drop(index=outlier_indices)
-        y_cleaned = y.drop(index=outlier_indices)
-        return X_cleaned, y_cleaned
-
-    # If X is a single dataframe
-    outlier_indices = detect_outliers_multiple_methods(X, method, threshold)
-    return X.drop(index=outlier_indices)
+        logger.info(f"Number of outliers detected: {len(outlier_indices)}")
+        return X.drop(index=outlier_indices)
+    except Exception as e:
+        logger.error(f"Error removing outliers: {e}")
+        raise
 
 
+# Add logging to other key functions, for example:
 def preprocess_data(X: pd.DataFrame) -> np.ndarray:
     """Preprocess the features by standardizing them."""
-    scaler = StandardScaler()
-    X_scaled = scaler.fit_transform(X)
-
-    return X_scaled
+    try:
+        logger.info("Starting data preprocessing")
+        scaler = StandardScaler()
+        X_scaled = scaler.fit_transform(X)
+        logger.info("Data preprocessing completed")
+        return X_scaled
+    except Exception as e:
+        logger.error(f"Error during preprocessing: {e}")
+        raise
 
 
 # -------------------------

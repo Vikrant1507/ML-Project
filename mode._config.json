@@ -1,0 +1,63 @@
+{
+    "model_name": "Vomitoxin Prediction Model",
+    "version": "1.0.0",
+    "model_type": "XGBoost",
+    "input_features": [
+        "wavelength_band_1",
+        "wavelength_band_2",
+        "wavelength_band_3",
+        "spectral_reflectance_1",
+        "spectral_reflectance_2"
+    ],
+    "input_features_values": [
+        0.416181182,
+        0.396843651,
+        0.40898487,
+        0.372865168,
+        0.385293248,
+        0.365389882,
+        0.355225527,
+        0.343350185,
+        0.344836526,
+        0.361567025,
+        0.357384108,
+        0.370340067,
+        0.35421024,
+        0.356694681,
+        0.345215436,
+        0.347214234,
+        0.355947061,
+        0.358428945,
+        0.357054919,
+        0.346977666,
+        0.348127131,
+        0.32584888,
+        0.329531551,
+        0.33703578,
+        0.31622423,
+        0.351301253,
+        0.337339482,
+        0.32353004,
+        0.31334216,
+        0.334816674
+    ],
+    "target_variable": "vomitoxin_ppb",
+    "preprocessing": {
+        "scaling": "StandardScaler",
+        "normalization": false
+    },
+    "performance_metrics": {
+        "mae": 0.5,
+        "rmse": 0.7,
+        "r2_score": 0.85
+    },
+    "model_metadata": {
+        "training_date": "2024-03-25",
+        "training_dataset_size": 1000,
+        "feature_importance": {
+            "wavelength_band_1": 0.4,
+            "wavelength_band_2": 0.3,
+            "spectral_reflectance_1": 0.2
+        }
+    }
+}

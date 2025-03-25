@@ -1,0 +1,110 @@
+2025-03-25 18:24:27,634 - DataProcessingLogger - INFO - Loading data from: C:\Users\samee\Desktop\ML Engineer project\MLE-Assignment.csv
+2025-03-25 18:24:27,750 - DataProcessingLogger - INFO - Data loaded successfully. Shape: (500, 450)
+2025-03-25 18:24:27,901 - DataProcessingLogger - INFO - Features shape: (500, 448), Target shape: (500,)
+2025-03-25 18:26:26,471 - DataProcessingLogger - INFO - Loading data from: C:\Users\samee\Desktop\ML Engineer project\MLE-Assignment.csv
+2025-03-25 18:26:26,575 - DataProcessingLogger - INFO - Data loaded successfully. Shape: (500, 450)
+2025-03-25 18:26:26,740 - DataProcessingLogger - INFO - Features shape: (500, 448), Target shape: (500,)
+2025-03-25 18:27:51,132 - DataProcessingLogger - INFO - Loading data from: C:\Users\samee\Desktop\ML Engineer project\MLE-Assignment.csv
+2025-03-25 18:27:51,237 - DataProcessingLogger - INFO - Data loaded successfully. Shape: (500, 450)
+2025-03-25 18:27:51,353 - DataProcessingLogger - INFO - Features shape: (500, 448), Target shape: (500,)
+2025-03-25 18:28:15,485 - DataProcessingLogger - INFO - Starting data preprocessing
+2025-03-25 18:28:15,510 - DataProcessingLogger - INFO - Data preprocessing completed
+2025-03-25 18:32:52,580 - DataProcessingLogger - INFO - Removing outliers using isolation_forest method
+2025-03-25 18:32:52,858 - DataProcessingLogger - INFO - Number of outliers detected: 50
+2025-03-25 18:37:29,926 - DataProcessingLogger - INFO - Starting data preprocessing
+2025-03-25 18:37:29,948 - DataProcessingLogger - INFO - Data preprocessing completed
+2025-03-25 18:41:54,095 - DataProcessingLogger - INFO - Loading data from: C:\Users\samee\Desktop\ML Engineer project\MLE-Assignment.csv
+2025-03-25 18:41:54,205 - DataProcessingLogger - INFO - Data loaded successfully. Shape: (500, 450)
+2025-03-25 18:41:54,354 - DataProcessingLogger - INFO - Features shape: (500, 448), Target shape: (500,)
+2025-03-25 18:42:04,032 - DataProcessingLogger - INFO - Starting data preprocessing
+2025-03-25 18:42:04,057 - DataProcessingLogger - INFO - Data preprocessing completed
+2025-03-25 18:42:35,353 - DataProcessingLogger - INFO - Removing outliers using isolation_forest method
+2025-03-25 18:42:35,670 - DataProcessingLogger - INFO - Number of outliers detected: 50
+2025-03-25 18:42:47,459 - DataProcessingLogger - INFO - Starting data preprocessing
+2025-03-25 18:42:47,482 - DataProcessingLogger - INFO - Data preprocessing completed
+2025-03-25 19:27:25,083 - DataProcessingLogger - INFO - Loading data from: C:\Users\samee\Desktop\ML Engineer project\MLE-Assignment.csv
+2025-03-25 19:27:25,279 - DataProcessingLogger - INFO - Data loaded successfully. Shape: (500, 450)
+2025-03-25 19:27:25,491 - DataProcessingLogger - INFO - Features shape: (500, 448), Target shape: (500,)
+2025-03-25 19:27:28,188 - DataProcessingLogger - INFO - Starting data preprocessing
+2025-03-25 19:27:28,221 - DataProcessingLogger - INFO - Data preprocessing completed
+2025-03-25 19:27:58,512 - DataProcessingLogger - INFO - Removing outliers using isolation_forest method
+2025-03-25 19:27:58,978 - DataProcessingLogger - INFO - Number of outliers detected: 50
+2025-03-25 19:28:01,491 - DataProcessingLogger - INFO - Starting data preprocessing
+2025-03-25 19:28:01,524 - DataProcessingLogger - INFO - Data preprocessing completed
+2025-03-25 19:43:38,666 - DataProcessingLogger - INFO - Loading data from: C:\Users\samee\Desktop\ML Engineer project\MLE-Assignment.csv
+2025-03-25 19:43:38,808 - DataProcessingLogger - INFO - Data loaded successfully. Shape: (500, 450)
+2025-03-25 19:43:39,032 - DataProcessingLogger - INFO - Features shape: (500, 448), Target shape: (500,)
+2025-03-25 19:43:41,380 - DataProcessingLogger - INFO - Starting data preprocessing
+2025-03-25 19:43:41,407 - DataProcessingLogger - INFO - Data preprocessing completed
+2025-03-25 19:44:09,012 - DataProcessingLogger - INFO - Removing outliers using isolation_forest method
+2025-03-25 19:44:09,342 - DataProcessingLogger - INFO - Number of outliers detected: 50
+2025-03-25 19:44:11,188 - DataProcessingLogger - INFO - Starting data preprocessing
+2025-03-25 19:44:11,231 - DataProcessingLogger - INFO - Data preprocessing completed
+2025-03-25 20:04:28,304 - DataProcessingLogger - INFO - Loading data from: C:\Users\samee\Desktop\ML Engineer project\MLE-Assignment.csv
+2025-03-25 20:04:28,449 - DataProcessingLogger - INFO - Data loaded successfully. Shape: (500, 450)
+2025-03-25 20:04:28,690 - DataProcessingLogger - INFO - Features shape: (500, 448), Target shape: (500,)
+2025-03-25 20:04:30,933 - DataProcessingLogger - INFO - Starting data preprocessing
+2025-03-25 20:04:30,956 - DataProcessingLogger - INFO - Data preprocessing completed
+2025-03-25 20:04:59,424 - DataProcessingLogger - INFO - Removing outliers using isolation_forest method
+2025-03-25 20:04:59,843 - DataProcessingLogger - INFO - Number of outliers detected: 50
+2025-03-25 20:05:02,062 - DataProcessingLogger - INFO - Starting data preprocessing
+2025-03-25 20:05:02,085 - DataProcessingLogger - INFO - Data preprocessing completed
+2025-03-25 20:20:10,213 - DataProcessingLogger - INFO - Loading data from: C:\Users\samee\Desktop\ML Engineer project\MLE-Assignment.csv
+2025-03-25 20:20:10,385 - DataProcessingLogger - INFO - Data loaded successfully. Shape: (500, 450)
+2025-03-25 20:20:10,625 - DataProcessingLogger - INFO - Features shape: (500, 448), Target shape: (500,)
+2025-03-25 20:20:13,079 - DataProcessingLogger - INFO - Starting data preprocessing
+2025-03-25 20:20:13,107 - DataProcessingLogger - INFO - Data preprocessing completed
+2025-03-25 20:20:40,571 - DataProcessingLogger - INFO - Removing outliers using isolation_forest method
+2025-03-25 20:20:40,867 - DataProcessingLogger - INFO - Number of outliers detected: 50
+2025-03-25 20:20:42,785 - DataProcessingLogger - INFO - Starting data preprocessing
+2025-03-25 20:20:42,815 - DataProcessingLogger - INFO - Data preprocessing completed
+2025-03-25 20:26:10,706 - DataProcessingLogger - INFO - Loading data from: C:\Users\samee\Desktop\ML Engineer project\MLE-Assignment.csv
+2025-03-25 20:26:10,899 - DataProcessingLogger - INFO - Data loaded successfully. Shape: (500, 450)
+2025-03-25 20:26:11,215 - DataProcessingLogger - INFO - Features shape: (500, 448), Target shape: (500,)
+2025-03-25 20:26:14,012 - DataProcessingLogger - INFO - Starting data preprocessing
+2025-03-25 20:26:14,037 - DataProcessingLogger - INFO - Data preprocessing completed
+2025-03-25 20:26:42,733 - DataProcessingLogger - INFO - Removing outliers using isolation_forest method
+2025-03-25 20:26:43,003 - DataProcessingLogger - INFO - Number of outliers detected: 50
+2025-03-25 20:26:45,067 - DataProcessingLogger - INFO - Starting data preprocessing
+2025-03-25 20:26:45,100 - DataProcessingLogger - INFO - Data preprocessing completed
+2025-03-25 20:40:49,375 - DataProcessingLogger - INFO - Loading data from: C:\Users\samee\Desktop\ML Engineer project\MLE-Assignment.csv
+2025-03-25 20:40:49,509 - DataProcessingLogger - INFO - Data loaded successfully. Shape: (500, 450)
+2025-03-25 20:40:49,669 - DataProcessingLogger - INFO - Features shape: (500, 448), Target shape: (500,)
+2025-03-25 20:40:51,234 - DataProcessingLogger - INFO - Starting data preprocessing
+2025-03-25 20:40:51,255 - DataProcessingLogger - INFO - Data preprocessing completed
+2025-03-25 20:41:08,009 - DataProcessingLogger - INFO - Removing outliers using isolation_forest method
+2025-03-25 20:41:08,275 - DataProcessingLogger - INFO - Number of outliers detected: 50
+2025-03-25 20:41:09,689 - DataProcessingLogger - INFO - Starting data preprocessing
+2025-03-25 20:41:09,710 - DataProcessingLogger - INFO - Data preprocessing completed
+2025-03-25 21:03:11,653 - DataProcessingLogger - INFO - Loading data from: C:\Users\samee\Desktop\ML Engineer project\MLE-Assignment.csv
+2025-03-25 21:03:11,824 - DataProcessingLogger - INFO - Data loaded successfully. Shape: (500, 450)
+2025-03-25 21:03:12,043 - DataProcessingLogger - INFO - Features shape: (500, 448), Target shape: (500,)
+2025-03-25 21:03:13,926 - DataProcessingLogger - INFO - Starting data preprocessing
+2025-03-25 21:03:13,959 - DataProcessingLogger - INFO - Data preprocessing completed
+2025-03-25 21:03:30,701 - DataProcessingLogger - INFO - Removing outliers using isolation_forest method
+2025-03-25 21:03:30,966 - DataProcessingLogger - INFO - Number of outliers detected: 50
+2025-03-25 21:03:32,626 - DataProcessingLogger - INFO - Starting data preprocessing
+2025-03-25 21:03:32,652 - DataProcessingLogger - INFO - Data preprocessing completed
+2025-03-25 21:28:07,795 - DataProcessingLogger - INFO - Loading data from: C:\Users\samee\Desktop\ML Engineer project\MLE-Assignment.csv
+2025-03-25 21:28:07,944 - DataProcessingLogger - INFO - Data loaded successfully. Shape: (500, 450)
+2025-03-25 21:28:08,100 - DataProcessingLogger - INFO - Features shape: (500, 448), Target shape: (500,)
+2025-03-25 21:28:09,684 - DataProcessingLogger - INFO - Starting data preprocessing
+2025-03-25 21:28:09,706 - DataProcessingLogger - INFO - Data preprocessing completed
+2025-03-25 21:28:26,956 - DataProcessingLogger - INFO - Removing outliers using isolation_forest method
+2025-03-25 21:28:27,213 - DataProcessingLogger - INFO - Number of outliers detected: 50
+2025-03-25 21:28:28,700 - DataProcessingLogger - INFO - Starting data preprocessing
+2025-03-25 21:28:28,722 - DataProcessingLogger - INFO - Data preprocessing completed
+2025-03-25 21:51:06,256 - DataProcessingLogger - INFO - Loading data from: C:\Users\samee\Desktop\ML Engineer project\MLE-Assignment.csv
+2025-03-25 21:51:06,425 - DataProcessingLogger - INFO - Data loaded successfully. Shape: (500, 450)
+2025-03-25 21:51:06,593 - DataProcessingLogger - INFO - Features shape: (500, 448), Target shape: (500,)
+2025-03-25 21:51:08,200 - DataProcessingLogger - INFO - Starting data preprocessing
+2025-03-25 21:51:08,229 - DataProcessingLogger - INFO - Data preprocessing completed
+2025-03-25 21:51:26,631 - DataProcessingLogger - INFO - Removing outliers using isolation_forest method
+2025-03-25 21:51:26,921 - DataProcessingLogger - INFO - Number of outliers detected: 50
+2025-03-25 21:51:28,414 - DataProcessingLogger - INFO - Starting data preprocessing
+2025-03-25 21:51:28,433 - DataProcessingLogger - INFO - Data preprocessing completed
+2025-03-25 21:59:01,822 - DataProcessingLogger - INFO - Loading data from: C:\Users\samee\Desktop\ML Engineer project\MLE-Assignment.csv
+2025-03-25 21:59:01,939 - DataProcessingLogger - INFO - Data loaded successfully. Shape: (500, 450)
+2025-03-25 21:59:02,106 - DataProcessingLogger - INFO - Features shape: (500, 448), Target shape: (500,)
+2025-03-25 21:59:02,211 - DataProcessingLogger - INFO - Removing outliers using consensus method
+2025-03-25 21:59:02,516 - DataProcessingLogger - ERROR - Error removing outliers: Invalid method: consensus. Choose 'all' or one of: ['z_score', 'iqr', 'isolation_forest']
